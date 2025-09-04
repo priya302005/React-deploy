@@ -1,61 +1,60 @@
-import React from "react";
-import "./App.css";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Campus Management Demo</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
 
-const App = () => {
-  const handleButtonClick = () => {
-    alert("Feature coming soon!");
-  };
+  <script type="text/babel">
+    const App = () => {
+      const [name, setName] = React.useState("");
+      const [submitted, setSubmitted] = React.useState(false);
 
-  return (
-    <div>
-      <header className="header">
-        <h1>Smart Campus Management System</h1>
-        <nav>
-          <a href="#home">Home</a>
-          <a href="#features">Features</a>
-          <a href="#contact">Contact</a>
-        </nav>
-      </header>
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        setSubmitted(true);
+      };
 
-      <section id="home" className="hero">
-        <h2>Welcome to Smart Campus</h2>
-        <p>Manage your campus efficiently with our smart solutions.</p>
-        <button onClick={handleButtonClick}>Get Started</button>
-      </section>
+      return (
+        <div>
+          <h1>Smart Campus Management</h1>
 
-      <section id="features">
-        <h2>Features</h2>
-        <div className="features-container">
-          <div className="feature-box">
-            <h3>Attendance Tracking</h3>
-            <p>Track student attendance with BLE beacons.</p>
-          </div>
-          <div className="feature-box">
-            <h3>Event Management</h3>
-            <p>Organize and manage campus events easily.</p>
-          </div>
-          <div className="feature-box">
-            <h3>Notifications</h3>
-            <p>Send instant notifications to students and staff.</p>
-          </div>
+          {!submitted ? (
+            <form onSubmit={handleSubmit}>
+              <label>
+                Enter your name: 
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </label>
+              <button type="submit">Submit</button>
+            </form>
+          ) : (
+            <div>
+              <h2>Hello, {name}!</h2>
+              <h3>Campus Timings:</h3>
+              <ul>
+                <li>Monday - Friday: 8:00 AM - 6:00 PM</li>
+                <li>Saturday: 9:00 AM - 2:00 PM</li>
+                <li>Sunday: Closed</li>
+              </ul>
+              <button onClick={() => setSubmitted(false)}>Enter Again</button>
+            </div>
+          )}
         </div>
-      </section>
+      );
+    };
 
-      <section id="contact">
-        <h2>Contact Us</h2>
-        <form onSubmit={(e) => e.preventDefault()}>
-          <input type="text" placeholder="Your Name" required />
-          <input type="email" placeholder="Your Email" required />
-          <textarea placeholder="Message" required></textarea>
-          <button type="submit">Send</button>
-        </form>
-      </section>
-
-      <footer>
-        <p>&copy; 2025 Smart Campus Management System</p>
-      </footer>
-    </div>
-  );
-};
-
-export default App;
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  </script>
+</body>
+</html>
