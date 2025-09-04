@@ -15,15 +15,13 @@ const App = () => {
 
       {!submitted ? (
         <form onSubmit={handleSubmit}>
-          <label>
-            Enter your name: 
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Enter your name"
+            required
+          />
           <button type="submit">Submit</button>
         </form>
       ) : (
